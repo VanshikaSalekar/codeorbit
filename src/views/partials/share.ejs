@@ -1,0 +1,2 @@
+<% const shareBase = { tool: '/tools', snippet: '/snippets', meme: '/memelearn', video: '/videos' };
+const sharePath = it.type === 'post' ? '/blog/' + it.slug : shareBase[it.type] + '#' + it.type + '-' + it.id; %><button type="button" class="share" data-share data-title="<%= it.title %>" data-url="<%= siteUrl %><%= sharePath %>" aria-haspopup="dialog" aria-expanded="false" aria-label="Share <%= it.title %>"><span aria-hidden="true">↗</span> Share</button>

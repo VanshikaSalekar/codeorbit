@@ -83,3 +83,62 @@ document.addEventListener('click', async e => {
     toast('Thanks for the love!');
   } catch (err) { b.disabled = false; toast('Could not save your like. Try again.'); }
 });
+/* Share buttons: native share sheet on touch devices, link menu elsewhere */
+(function () {
+  let menu = null, opener = null;
+  function close(refocus) {
+    if (!menu) return;
+    menu.remove(); menu = null;
+    if (opener) { opener.setAttribute('aria-expanded', 'false'); if (refocus) opener.focus(); opener = null; }
+  }
+  const track = (method, b) => { if (window.gtag) gtag('event', 'share', { method: method, content_type: 'page', item_id: b.dataset.url }); };
+  function open(b, title, url) {
+    close(false);
+    const enc = encodeURIComponent, t = enc(title), u = enc(url);
+    const items = [
+      ['WhatsApp', 'https://wa.me/?text=' + enc(title + ' ' + url)],
+      ['X (Twitter)', 'https://twitter.com/intent/tweet?text=' + t + '&url=' + u],
+      ['LinkedIn', 'https://www.linkedin.com/sharing/share-offsite/?url=' + u],
+      ['Facebook', 'https://www.facebook.com/sharer/sharer.php?u=' + u],
+      ['Reddit', 'https://www.reddit.com/submit?url=' + u + '&title=' + t],
+      ['Email', 'mailto:?subject=' + t + '&body=' + enc(title + '\n' + url)]
+    ];
+    menu = document.createElement('div');
+    menu.className = 'sharemenu'; menu.setAttribute('role', 'dialog'); menu.setAttribute('aria-label', 'Share ' + title);
+    const copy = document.createElement('button');
+    copy.type = 'button'; copy.textContent = 'Copy link';
+    copy.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(url); toast('Link copied'); track('copy', b); }
+      catch (err) { toast('Copy blocked. Copy the address bar instead.'); }
+      close(true);
+    });
+    menu.appendChild(copy);
+    items.forEach(([name, href]) => {
+      const a = document.createElement('a');
+      a.href = href; a.textContent = name;
+      if (!href.startsWith('mailto:')) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+      a.addEventListener('click', () => { track(name, b); close(false); });
+      menu.appendChild(a);
+    });
+    document.body.appendChild(menu);
+    const r = b.getBoundingClientRect(), w = menu.offsetWidth, vw = document.documentElement.clientWidth;
+    menu.style.top = (window.scrollY + r.bottom + 8) + 'px';
+    menu.style.left = Math.max(8, Math.min(r.left, vw - w - 8)) + window.scrollX + 'px';
+    b.setAttribute('aria-expanded', 'true'); opener = b;
+    copy.focus({ preventScroll: true });
+  }
+  document.addEventListener('click', async e => {
+    const b = e.target.closest('[data-share]');
+    if (!b) { if (menu && !e.target.closest('.sharemenu')) close(false); return; }
+    e.preventDefault();
+    if (menu && opener === b) return close(true);
+    const url = new URL(b.dataset.url, location.href).href, title = b.dataset.title;
+    if (navigator.share && window.matchMedia('(pointer: coarse)').matches) {
+      try { await navigator.share({ title: title, text: title, url: url }); track('native', b); } catch (err) { /* cancelled */ }
+      return;
+    }
+    open(b, title, url);
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(true); });
+  window.addEventListener('resize', () => close(false));
+})();

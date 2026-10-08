@@ -48,6 +48,7 @@
       <nav class="nav" aria-label="Main">
         <a class="logo" href="/"><b>C</b>odeOrbit</a>
         <% if (siteLikes !== null) { %><button type="button" class="like like-site" data-like-site aria-pressed="<%= siteLiked %>" aria-label="<%= siteLiked ? 'You liked CodeOrbit' : 'Like CodeOrbit' %>"<%= siteLiked ? ' disabled' : '' %>><span aria-hidden="true">♥</span> <span class="n"><%= siteLikes %></span></button><% } %>
+<% if (siteLikes !== null) { %><button type="button" class="share share-site" data-share data-title="CodeOrbit: dev tools, snippets, memes and articles" data-url="<%= siteUrl %>/" aria-haspopup="dialog" aria-expanded="false" aria-label="Share CodeOrbit"><span aria-hidden="true">↗</span><span class="share-t">Share</span></button><% } %>
         <% [['tools','Tools','/tools'],['snippets','Snippets','/snippets'], ['videos','Videos','/videos'],['memelearn','MemeLearn','/memelearn'],['blog','Blog','/blog'],['search','Search','/search']].forEach(t => { %>
           <a class="tab" href="<%= t[2] %>" <%- active === t[0] ? 'aria-current="page"' : '' %>><%= t[1] %></a>
         <% }) %>
