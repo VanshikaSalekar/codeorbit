@@ -1,0 +1,2 @@
+<article class="snip win"><div class="bar"><i></i><i></i><i></i><span><%= it.title %><%= it.lang ? '.' + it.lang.toLowerCase() : '' %></span><button class="btn cp" data-target="code-<%= it.id %>">Copy</button></div>
+<pre><code id="code-<%= it.id %>"><%= it.body %></code></pre><div class="ft"><%= it.summary %><br><%- include('tags', {it}) %><%- include('like', {it}) %></div></article>

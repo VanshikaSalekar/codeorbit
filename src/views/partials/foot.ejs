@@ -1,0 +1,26 @@
+</main>
+<footer>
+<div class="wrap footgrid">
+  <a href="/" class="footlogo"><b>C</b>odeOrbit <span class="foot-year">© <%= new Date().getFullYear() %></span></a>
+  <nav class="foot-nav" aria-label="Footer">
+    <a href="/tools">Tools</a>
+    <a href="/snippets">Snippets</a>
+    <a href="/videos">Videos</a>
+    <a href="/blog">Blog</a>
+    <a href="/memelearn">MemeLearn</a>
+  </nav>
+  <div class="foot-socials">
+    <% if (socials.github) { %><a href="<%= socials.github %>" target="_blank" rel="noopener" aria-label="GitHub">GH</a><% } %>
+    <% if (socials.linkedin) { %><a href="<%= socials.linkedin %>" target="_blank" rel="noopener" aria-label="Linkedin">LD</a><% } %>
+  </div>
+</div>
+<div class="wrap foot-legal">
+  <a href="/privacy-policy">Privacy Policy</a><span>·</span>
+  <a href="/terms">Terms</a><span>·</span>
+  <a href="/faq">FAQ</a><span>·</span>
+  <a href="/contact">Contact</a><span>·</span>
+  <a href="/about">About</a><span>·</span>
+  <button type="button" class="lnk foot-lnk" data-cookie-settings>Cookie settings</button>
+</div>
+</footer>
+</body></html>

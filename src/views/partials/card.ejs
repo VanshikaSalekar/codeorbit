@@ -1,0 +1,1 @@
+<% if (it.type === 'tool') { %><%- include('tool', {it}) %><% } else if (it.type === 'snippet') { %><%- include('snippet', {it}) %><% } else if (it.type === 'meme') { %><%- include('meme', {it}) %><% } else if (it.type === 'video') { %><%- include('video', {it}) %><% } else { %><%- include('post', {it}) %><% } %>

@@ -1,0 +1,14 @@
+<%- include('partials/head') %>
+<script type="application/ld+json">
+<%- JSON.stringify({
+  "@context": "https://schema.org", "@type": "Article",
+  headline: post.title, description: post.summary,
+  author: { "@type": "Organization", name: "CodeOrbit" },
+  datePublished: post.created
+}) %>
+</script>
+<section><div class="wrap"><article class="read"><a href="/blog" class="btn">Back to blog</a><h1><%= post.title %></h1>
+<p class="hand big nolead"><%= Math.max(1, Math.round(post.body.split(/\s+/).length / 200)) %> min read</p>
+<% post.paras.forEach(p => { %><p><%= p %></p><% }) %><% const it = post; %><%- include('partials/tags', {it}) %><%- include('partials/like', {it}) %></article>
+<% if (related.length) { %><div class="read"><h2 class="sub">Keep exploring</h2><% related.forEach(it => { %><%- include('partials/card', {it}) %><% }) %></div><% } %></div></section>
+<%- include('partials/foot') %>

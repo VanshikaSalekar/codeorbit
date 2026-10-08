@@ -1,0 +1,5 @@
+<%- include('partials/head') %>
+<section><div class="wrap"><h1 class="h2"><span class="under">Tools</span></h1><p class="hand big">pick a drawer, grab a utility</p>
+<div class="filters"><a class="btn" href="/tools" <%- !cat ? 'aria-current="true"' : '' %>>All</a><% cats.forEach(c => { %><a class="btn" href="/tools?cat=<%= encodeURIComponent(c) %>" <%- cat === c ? 'aria-current="true"' : '' %>><%= c %></a><% }) %></div>
+<div class="tools"><% tools.forEach(it => { %><%- include('partials/tool', {it}) %><% }) %></div></div></section>
+<%- include('partials/foot') %>

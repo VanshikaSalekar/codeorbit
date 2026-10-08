@@ -1,0 +1,2 @@
+<article class="meme"><h3><%= it.title %>, explained</h3><div class="panels"><% it.panels.forEach(p => { %><div class="pn"><b><%= p[0] %></b><span><%= p[1] || '' %></span></div><% }) %></div>
+<p class="expl"><span class="hand">the point: </span><%= it.body %></p><%- include('tags', {it}) %><%- include('like', {it}) %></article>

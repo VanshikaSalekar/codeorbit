@@ -1,0 +1,15 @@
+<%- include('partials/head') %>
+<div class="hero"><div class="orbit" aria-hidden="true"><div></div><div class="r2"></div><div class="r3"></div><div class="m"></div></div>
+<div class="wrap heroin"><span class="hand big">a directory for people who build things</span>
+<h1>Code<br><em>Orbit</em></h1><p class="lead">Find the right tool, copy the right snippet, finally get the joke that explains recursion, and read articles worth finishing.</p>
+<p class="ctas"><a class="btn pk" href="/tools">Browse tools</a><a class="btn cy" href="/snippets">Copy a snippet</a><a class="btn" href="/videos">Watch videos</a></p>
+<%- include('partials/search') %><div class="sticker" aria-hidden="true"><%= toolCount %>+<br>tools</div></div></div>
+<section><div class="wrap grid-a"><div class="folder"><h2>/tools</h2><p>Small utilities you will bookmark and use every week.</p>
+<div class="strip"><% tools.forEach(t => { %><div class="win mini"><strong><%= t.title %></strong><br><small><%= t.summary %></small></div><% }) %></div><a class="btn pk" href="/tools">Browse all tools</a></div>
+<% if (snippet) { %><div class="win tilt"><div class="bar"><i></i><i></i><i></i><span><%= snippet.title %></span></div><pre><code><%= snippet.body %></code></pre><div class="ft"><a class="btn cy" href="/snippets">Copy more snippets</a></div></div><% } %></div></section>
+<section class="band"><div class="wrap grid-a"><div class="poster"><span class="hand big">learn it through jokes</span><h2>Meme<br>Learn</h2><a class="btn" href="/memelearn">Read the comics</a></div>
+<% if (meme) { %><div><% const it = meme; %><%- include('partials/meme', {it}) %></div><% } %></div></section>
+<section><div class="wrap"><h2 class="h2"><span class="under">Fresh reads</span></h2><% if (posts.length) { %><div class="mag"><a class="feat" href="/blog/<%= posts[0].slug %>"><span class="hand big">featured</span><h3><%= posts[0].title %></h3><p><%= posts[0].summary %></p></a>
+<div><% posts.slice(1).forEach(it => { %><%- include('partials/post', {it}) %><% }) %></div></div><% } %></div></section>
+<section class="cta"><div class="wrap"><span class="hand big">got a find?</span><h2>Know a tool or snippet we should feature?</h2><p>Send it over. The best suggestions end up on the site, with credit.</p><a class="btn" href="/contact">Suggest something</a></div></section>
+<%- include('partials/foot') %>

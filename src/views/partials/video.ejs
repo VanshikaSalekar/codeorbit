@@ -1,0 +1,18 @@
+<script type="application/ld+json">
+<%- JSON.stringify({
+  "@context": "https://schema.org", "@type": "VideoObject",
+  name: it.title, description: it.summary,
+  thumbnailUrl: `https://i.ytimg.com/vi/${it.ytId}/hqdefault.jpg`,
+  uploadDate: it.created, contentUrl: it.url
+}) %>
+</script>
+<article class="tool" style="background:var(--white)">
+  <a href="<%= it.url %>" target="_blank" rel="noopener" aria-label="Watch <%= it.title %> on YouTube" style="display:block;position:relative;border:3px solid var(--ink);margin-bottom:.6rem">
+    <img src="https://i.ytimg.com/vi/<%= it.ytId %>/hqdefault.jpg" alt="Thumbnail for the video: <%= it.title %>" width="480" height="360" loading="lazy" decoding="async" style="display:block;width:100%;height:auto">
+    <span aria-hidden="true" style="position:absolute;inset:0;display:grid;place-items:center;font-size:2.2rem">▶</span>
+  </a>
+  <h3><%= it.title %></h3>
+  <p><%= it.summary %></p>
+  <%- include('tags', {it}) %>
+  <br><a class="btn pk" href="<%= it.url %>" target="_blank" rel="noopener">Watch on YouTube</a><%- include('like', {it}) %>
+</article>

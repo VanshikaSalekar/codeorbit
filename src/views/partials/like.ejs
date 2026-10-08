@@ -1,0 +1,1 @@
+<% const isLiked = liked.has(it.id); %><button type="button" class="like<%= isLiked ? ' is-liked' : '' %>" data-like="<%= it.id %>" aria-pressed="<%= isLiked %>" aria-label="<%= isLiked ? 'You liked ' + it.title : 'Like ' + it.title %>"<%= isLiked ? ' disabled' : '' %>><span aria-hidden="true">♥</span> <span class="n"><%= it.likes || 0 %></span></button>

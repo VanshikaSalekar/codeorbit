@@ -1,0 +1,7 @@
+<%- include('../partials/head') %>
+<section><div class="wrap"><h1 class="h2">Messages</h1><p><a class="btn" href="<%= base %>">Back to content</a></p>
+<table class="tbl"><thead><tr><th>From</th><th>Message</th><th>Sent</th><th></th></tr></thead><tbody>
+<% messages.forEach(m => { %><tr><td><%= m.name %><br><small><%= m.email %></small></td><td><%= m.message %></td><td><%= m.created %></td>
+<td><form method="post" action="<%= base %>/messages/delete/<%= m.id %>" data-confirm="Delete this message?"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="lnk">Delete</button></form></td></tr><% }) %>
+</tbody></table></div></section>
+<%- include('../partials/foot') %>

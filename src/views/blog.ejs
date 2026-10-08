@@ -1,0 +1,5 @@
+<%- include('partials/head') %>
+<section><div class="wrap"><h1 class="h2"><span class="under">Blog</span></h1><p class="hand big">articles with a point of view</p>
+<% if (posts.length) { %><div class="mag"><a class="feat" href="/blog/<%= posts[0].slug %>"><span class="hand big">start here</span><h3><%= posts[0].title %></h3><p><%= posts[0].summary %></p></a>
+<div><% posts.slice(1).forEach(it => { %><%- include('partials/post', {it}) %><% }) %></div></div><% } else { %><p>No posts yet.</p><% } %></div></section>
+<%- include('partials/foot') %>

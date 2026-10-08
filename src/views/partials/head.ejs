@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title><%= title %></title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <meta name="theme-color" content="#ffe43a">
+  
+  <link rel="canonical" href="<%= siteUrl %><%= req.path %>">
+  <% if (desc) { %>
+    <meta name="description" content="<%= desc %>">
+    <meta property="og:site_name" content="CodeOrbit">
+    <meta property="og:type" content="<%= typeof ogType !== 'undefined' ? ogType : 'website' %>">
+    <meta property="og:title" content="<%= title %>">
+    <meta property="og:description" content="<%= desc %>">
+    <meta property="og:url" content="<%= siteUrl %><%= req.path %>">
+    <meta property="og:image" content="<%= siteUrl %>/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="CodeOrbit: tools, snippets, memes and articles for developers">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= title %>">
+    <meta name="twitter:description" content="<%= desc %>">
+    <meta name="twitter:image" content="<%= siteUrl %>/og-image.png">
+  <% } %>
+
+  <% if (noindex) { %><meta name="robots" content="noindex, nofollow"><% } %>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <% if (siteVerification) { %><meta name="google-site-verification" content="<%= siteVerification %>"><% } %>
+  
+  <% if (gaId) { %><meta name="ga-id" content="<%= gaId %>"><% } %>
+  
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <div class="wrap">
+      <nav class="nav" aria-label="Main">
+        <a class="logo" href="/"><b>C</b>odeOrbit</a>
+        <% if (siteLikes !== null) { %><button type="button" class="like like-site" data-like-site aria-pressed="<%= siteLiked %>" aria-label="<%= siteLiked ? 'You liked CodeOrbit' : 'Like CodeOrbit' %>"<%= siteLiked ? ' disabled' : '' %>><span aria-hidden="true">♥</span> <span class="n"><%= siteLikes %></span></button><% } %>
+        <% [['tools','Tools','/tools'],['snippets','Snippets','/snippets'], ['videos','Videos','/videos'],['memelearn','MemeLearn','/memelearn'],['blog','Blog','/blog'],['search','Search','/search']].forEach(t => { %>
+          <a class="tab" href="<%= t[2] %>" <%- active === t[0] ? 'aria-current="page"' : '' %>><%= t[1] %></a>
+        <% }) %>
+      </nav>
+    </div>
+  </header>
+  <main id="main">

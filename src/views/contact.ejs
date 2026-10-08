@@ -1,0 +1,24 @@
+<%- include('partials/head') %>
+<section><div class="wrap">
+  <div class="poster" style="margin-bottom:2rem"><span class="hand big">📬 contact codeorbit</span><h1>Let's talk</h1></div>
+  <p class="lead" style="max-width:40rem">Question, suggestion, bug report, partnership idea, or just want to say hi? Send a message below.</p>
+
+  <% if (sent) { %>
+    <div class="bx" style="max-width:640px;padding:2rem;text-align:center">
+      <span style="font-size:3rem">✅</span>
+      <h2 style="font-size:2rem;margin:.6rem 0">Message sent</h2>
+      <p>Thanks for reaching out. We'll get back to you soon.</p>
+      <a class="btn" href="/contact">Send another message</a>
+    </div>
+  <% } else { %>
+    <form class="f bx" method="post" action="/contact" style="max-width:640px">
+      <% if (error) { %><p class="err" role="alert"><%= error %></p><% } %>
+      <label>Name<input name="name" required maxlength="100" value="<%= values.name %>"></label>
+      <label>Email<input type="email" name="email" required maxlength="200" value="<%= values.email %>"></label>
+      <label>Message<textarea name="message" rows="6" required maxlength="2000"><%= values.message %></textarea></label>
+      <button class="btn cy">Send message</button>
+      <input type="text" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px" aria-hidden="true">
+    </form>
+  <% } %>
+</div></section>
+<%- include('partials/foot') %>

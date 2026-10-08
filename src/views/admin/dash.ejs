@@ -1,0 +1,9 @@
+<%- include('../partials/head') %>
+<section><div class="wrap"><h1 class="h2">Content</h1>
+<p><% ['tool','snippet','meme','post','video'].forEach(t => { %><a class="btn" href="<%= base %>/new/<%= t %>">New <%= t %></a> <% }) %>
+<a class="btn cy" href="<%= base %>/messages">View messages</a>
+<form method="post" action="<%= base %>/logout" style="display:inline"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn pk">Sign out</button></form></p>
+<table class="tbl"><thead><tr><th>Type</th><th>Title</th><th>Actions</th></tr></thead><tbody>
+<% items.forEach(i => { %><tr><td><%= i.type %></td><td><%= i.title %></td><td><a href="<%= base %>/edit/<%= i.id %>">Edit</a>
+<form method="post" action="<%= base %>/delete/<%= i.id %>" style="display:inline" data-confirm="Delete “<%= i.title %>”?"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="lnk">Delete</button></form></td></tr><% }) %></tbody></table></div></section>
+<%- include('../partials/foot') %>

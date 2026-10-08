@@ -1,0 +1,6 @@
+<%- include('partials/head') %>
+<section><div class="wrap"><h1 class="h2"><span class="under">Search</span></h1><%- include('partials/search') %>
+<% if (term) { %><p class="hand big"><%= results.length %> result<%= results.length === 1 ? '' : 's' %> for “<%= term %>”</p>
+<% if (!results.length) { %><p>Nothing matched. Try a broader word such as css, git or json.</p><% } %>
+<% results.forEach(it => { %><div class="res"><%- include('partials/card', {it}) %></div><% }) %><% } %></div></section>
+<%- include('partials/foot') %>

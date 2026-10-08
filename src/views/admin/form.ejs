@@ -1,0 +1,14 @@
+<%- include('../partials/head') %>
+<% const v = item || {}; const tags = Array.isArray(v.tags) ? v.tags.join(', ') : (v.tags || ''); %>
+<section><div class="wrap"><h1 class="h2"><%= item && item.id ? 'Edit' : 'New' %> <%= type %></h1>
+<form class="f bx" method="post" action="<%= base %><%= item && item.id ? '/edit/' + item.id : '/new/' + type %>"><input type="hidden" name="_csrf" value="<%= csrf %>">
+<% if (error) { %><p class="err" role="alert"><%= error %></p><% } %>
+<label>Title<input name="title" required maxlength="140" value="<%= v.title || '' %>"></label>
+<label>Summary<textarea name="summary" rows="2" required maxlength="400"><%= v.summary || '' %></textarea></label>
+<% if (type === 'tool') { %><label>Link (https://…)<input name="url" value="<%= v.url || '' %>"></label><label>Category<input name="cat" value="<%= v.cat || '' %>"></label><% } %>
+<% if (type === 'snippet') { %><label>Language label<input name="lang" maxlength="12" value="<%= v.lang || '' %>"></label><label>Code<textarea name="body" rows="8" class="mono"><%= v.body || '' %></textarea></label><% } %>
+<% if (type === 'meme') { %><label>Panels, one per line as “big text | caption”<textarea name="extra" rows="4"><%= v.extra || '' %></textarea></label><label>The point (explanation)<textarea name="body" rows="3"><%= v.body || '' %></textarea></label><% } %>
+<% if (type === 'post') { %><label>Article text (blank line between paragraphs)<textarea name="body" rows="12"><%= v.body || '' %></textarea></label><% } %>
+<% if (type === 'video') { %><label>YouTube link (https://…)<input name="url" required value="<%= v.url || '' %>"></label><label>Topic<input name="cat" value="<%= v.cat || '' %>"></label><% } %>
+<label>Tags, comma separated<input name="tags" value="<%= tags %>"></label><button class="btn cy">Save</button> <a href="<%= base %>">Cancel</a></form></div></section>
+<%- include('../partials/foot') %>

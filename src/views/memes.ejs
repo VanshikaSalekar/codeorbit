@@ -1,0 +1,4 @@
+<%- include('partials/head') %>
+<section><div class="wrap"><h1 class="h2"><span class="under">MemeLearn</span></h1><p class="hand big">concepts, but funny</p>
+<div class="narrow"><% items.forEach(it => { %><%- include('partials/meme', {it}) %><% }) %></div></div></section>
+<%- include('partials/foot') %>

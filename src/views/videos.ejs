@@ -1,0 +1,9 @@
+<%- include('partials/head') %>
+<section><div class="wrap">
+  <h1 class="h2"><span class="under">Videos</span></h1>
+  <p class="hand big">watch it explained</p>
+  <div class="tools">
+    <% items.forEach(it => { %><%- include('partials/video', {it}) %><% }) %>
+  </div>
+</div></section>
+<%- include('partials/foot') %>
